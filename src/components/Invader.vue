@@ -2,14 +2,14 @@
 import {onMounted, ref, toRaw} from 'vue'
 import axios from 'axios'
 
-let uri = ref('http://192.168.1.100')
-// local : http://192.168.1.100 | cloud : https://shelly-86-eu.shelly.cloud
+let uri = ref('http://192.168.1.104')
+// local : http://192.168.1.104 | cloud : https://shelly-86-eu.shelly.cloud
 let dataStatus = ref('')
 let deviceState = ref('off')
 
 onMounted(async () => {
   const responseStatus = await axios.post(
-      'http://192.168.1.100/status',
+      'http://192.168.1.104/status',
       {
         "id": "80646F827174",
         "auth_key": "MWRmYzM2dWlkE62C6C4C76F817CE0A3D2902F5B5D4C115E49B28CF8539114D9246505DE5D368D560D06020A92480"
@@ -29,7 +29,7 @@ onMounted(async () => {
 const reboot = async () => {
   try {
     await axios.post(
-        'http://192.168.1.100/reboot',
+        'http://192.168.1.104/reboot',
         {
           "id": "80646F827174",
           "auth_key": "MWRmYzM2dWlkE62C6C4C76F817CE0A3D2902F5B5D4C115E49B28CF8539114D9246505DE5D368D560D06020A92480"
@@ -51,7 +51,7 @@ const onOff = async () => {
   let newState = deviceState.value === 'on' ? 'off' : 'on';
   try {
     await axios.post(
-        `http://192.168.1.100/relay/0?turn=${newState}`,
+        `http://192.168.1.104/relay/0?turn=${newState}`,
         {
           "id": "80646F827174",
           "auth_key": "MWRmYzM2dWlkE62C6C4C76F817CE0A3D2902F5B5D4C115E49B28CF8539114D9246505DE5D368D560D06020A92480"
